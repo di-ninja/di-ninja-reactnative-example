@@ -1,0 +1,25 @@
+#!/bin/bash
+SESSION_NAME="dev_alerte-secours-mobile"
+
+tmux kill-session -t "$SESSION_NAME"
+
+# session and windows
+tmux new-session -s "$SESSION_NAME" -n "overwatch" -d
+
+tmux new-window -t "$SESSION_NAME" -d -n "dev"
+
+
+# splitting
+tmux split-window -v -t "$SESSION_NAME:dev"
+tmux split-window -v -t "$SESSION_NAME:dev"
+
+tmux select-pane -t 2
+tmux send-keys -t "$SESSION_NAME:dev" 'npm run start' Enter
+
+tmux select-pane -t 1
+tmux send-keys -t "$SESSION_NAME:dev" 'npm run logcat' Enter
+
+tmux select-pane -t 0
+tmux send-keys -t "$SESSION_NAME:dev" 'npm run android && npm run log-android' Enter
+
+tmux attach-session -t "$SESSION_NAME"

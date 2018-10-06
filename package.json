@@ -1,0 +1,61 @@
+{
+  "name": "diNinjaReactnativeExample",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "clearcache": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-*",
+    "killport": "sudo kill -9 $(sudo lsof -t -i:8081)",
+    "disablehotword": "adb shell 'su root pm disable com.google.android.googlequicksearchbox'",
+    "tmux-dev": "./scripts/tmux-dev",
+    "dev": "npm run emulator & sleep 5 && npm run tmux-dev",
+    "emulator": "~/Android/Sdk/emulator/emulator -avd Nexus_5X_API_25_x86",
+    "reboot": "npm run clearcache && react-native start --reset-cache",
+    "devtools": "react-devtools",
+    "log": "npm run log-android",
+    "log-android": "react-native log-android",
+    "log-ios": "react-native log-ios",
+    "release": "cd android && ./gradlew assembleRelease",
+    "logcat": "adb logcat"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
+    "autobind-decorator": "^2.1.0",
+    "bluebird": "^3.5.2",
+    "di-ninja": "^1.10.5",
+    "immer": "^1.7.2",
+    "native-base": "^2.8.1",
+    "react": "16.5.0",
+    "react-native": "0.57.2",
+    "react-native-config": "^0.11.5",
+    "react-native-vector-icons": "^6.0.1",
+    "react-navigation": "^2.17.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-form": "^7.4.2",
+    "redux-persist": "^5.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "23.6.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-require-context-polyfill": "^1.0.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.47.1",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
